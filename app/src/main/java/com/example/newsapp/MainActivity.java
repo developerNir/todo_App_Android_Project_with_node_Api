@@ -19,15 +19,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,25 +94,25 @@ public class MainActivity extends AppCompatActivity {
                         button.setVisibility(View.GONE);
                         try{
                             JSONObject jsonObject1 = new JSONObject(response.toString());
-                            String token = jsonObject1.getString("token");
-                            String user = jsonObject1.getString("user");
-                            // user Expend ----------name ---- email ------otp ----
-                            JSONObject jsonObject2 = new JSONObject(user);
-                            String name = jsonObject2.getString("name");
-                            String email = jsonObject2.getString("email");
-                            String otp = jsonObject2.getString("otp");
+                                String token = jsonObject1.getString("token");
+                                String user = jsonObject1.getString("user");
+                                // user Expend ----------name ---- email ------otp ----
+                                JSONObject jsonObject2 = new JSONObject(user);
+                                String name = jsonObject2.getString("name");
+                                String email = jsonObject2.getString("email");
+                                String otp = jsonObject2.getString("otp");
 
-                            textView.append("\n"+token);
-                            textView.append("\n"+name);
-                            textView.append("\n"+email);
-                            textView.append("\n"+otp);
-                            textView.append("\n\n"+user);
+                                textView.append("\n" + token);
+                                textView.append("\n" + name);
+                                textView.append("\n" + email);
+                                textView.append("\n" + otp);
+                                textView.append("\n\n" + user);
 
                         }catch (JSONException err){
-                            textView.append("\n"+err.toString());
+                            textView.append("\n"+err);
                         }
 
-                        Log.d(TAG, "JsonObjectRequest onResponse: " + response.toString());
+                        Log.d(TAG, "JsonObjectRequest onResponse: " + response);
                         // Now, you can parse the JSON response and extract data
                         // If the response contains a reference to a JsonArray, you can proceed to fetch it
 //
@@ -126,10 +125,10 @@ public class MainActivity extends AppCompatActivity {
                         // Handle errors
                         progressBar.setVisibility(View.GONE);
                         textView.append("\n"+error.toString());
-                        textView.append("\n"+error.networkResponse.toString());
+                        textView.append("\n"+error.networkResponse);
                         textView.append("\n"+error.networkResponse.statusCode);
-                        textView.append("\n"+error.networkResponse.data);
-                        Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.toString());
+                        textView.append("\n"+ Arrays.toString(error.networkResponse.data));
+                        Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error);
                     }
                 }){
             @Override
