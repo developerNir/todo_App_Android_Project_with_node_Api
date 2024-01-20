@@ -26,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAG = "response";
-
-
     TextView textView;
     public RequestQueue requestQueue;
     ProgressBar progressBar;
@@ -98,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
                             boolean success = jsonObject1.getBoolean("success");
 
 
-                            if (success == false){
+                            if (!success){
                                 String error = jsonObject1.getString("error");
 
                                 textView.append("\n"+error);
                             }
 
-                            if (success == true){
+                            if (success){
                                 String token = jsonObject1.getString("token");
                                 String user = jsonObject1.getString("user");
                                 // user Expend ----------name ---- email ------otp ----
@@ -146,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap hashMap = new HashMap();
+                HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put("Content-Type", "application/json");
                 return hashMap;
             }
