@@ -94,6 +94,17 @@ public class MainActivity extends AppCompatActivity {
                         button.setVisibility(View.GONE);
                         try{
                             JSONObject jsonObject1 = new JSONObject(response.toString());
+
+                            boolean success = jsonObject1.getBoolean("success");
+
+
+                            if (success == false){
+                                String error = jsonObject1.getString("error");
+
+                                textView.append("\n"+error);
+                            }
+
+                            if (success == true){
                                 String token = jsonObject1.getString("token");
                                 String user = jsonObject1.getString("user");
                                 // user Expend ----------name ---- email ------otp ----
@@ -107,9 +118,11 @@ public class MainActivity extends AppCompatActivity {
                                 textView.append("\n" + email);
                                 textView.append("\n" + otp);
                                 textView.append("\n\n" + user);
+                            }
+
 
                         }catch (JSONException err){
-                            textView.append("\n"+err);
+                            textView.append("\n JSON =========="+err);
                         }
 
                         Log.d(TAG, "JsonObjectRequest onResponse: " + response);
@@ -127,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                         textView.append("\n"+error.toString());
                         textView.append("\n"+error.networkResponse);
                         textView.append("\n"+error.networkResponse.statusCode);
-                        textView.append("\n"+ Arrays.toString(error.networkResponse.data));
+                        textView.append("\n"+error.networkResponse.allHeaders);
                         Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error);
                     }
                 }){
