@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class SplashActivity extends AppCompatActivity {
 
     TextView textView;
-    Button button;
+    Button button, buttonVerify,BtnVerify;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -25,7 +25,8 @@ public class SplashActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.text2);
         button= findViewById(R.id.buttonNT);
-//        buttonVerify = findViewById(R.id.buttonVarfiy);
+        buttonVerify = findViewById(R.id.deleteButtonAC);
+        BtnVerify = findViewById(R.id.BtnVerify);
 
         textView.setOnClickListener(v->{
             start();
@@ -34,9 +35,12 @@ public class SplashActivity extends AppCompatActivity {
         button.setOnClickListener(v->{
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
         });
-//        buttonVerify.setOnClickListener(v->{
-////            startActivity(new Intent(SplashActivity.this, varifiy_fragment.class));
-//        });
+        buttonVerify.setOnClickListener(v->{
+            startActivity(new Intent(SplashActivity.this, DeleteAcount.class));
+        });
+        BtnVerify.setOnClickListener(v->{
+            startActivity(new Intent(SplashActivity.this, userVerify.class));
+        });
 
     }
     private void start(){

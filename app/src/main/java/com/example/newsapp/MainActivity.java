@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     EditText nameEd, passwordEd, emailEd;
     String url = "https://sore-pear-fish-cuff.cyclic.app/api/v1/register";
 
+    public static SharedPreferences sharedPreferences;
+    public static SharedPreferences.Editor editor;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         nameEd = findViewById(R.id.nameEd);
         passwordEd = findViewById(R.id.passwordEd);
         emailEd = findViewById(R.id.emailEd);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name),MODE_PRIVATE);
 
 
         requestQueue = Volley.newRequestQueue(MainActivity.this);
@@ -109,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
                                 String name = jsonObject2.getString("name");
                                 String email = jsonObject2.getString("email");
                                 String otp = jsonObject2.getString("otp");
+
+                                editor = sharedPreferences.edit();
+                                editor.putString("token",token);
+                                editor.apply();
 
                                 textView.append("\n" + token);
                                 textView.append("\n" + name);
