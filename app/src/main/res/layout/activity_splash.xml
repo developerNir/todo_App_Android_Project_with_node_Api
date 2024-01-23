@@ -50,6 +50,25 @@
         android:id="@+id/BtnVerify"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Get All Todo"
+        android:layout_gravity="center"
+        android:paddingHorizontal="30dp"
+        android:id="@+id/btnGetAllTodo"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Create Todo"
+        android:layout_gravity="center"
+        android:paddingHorizontal="30dp"
+        android:id="@+id/btnCreateTodo"
+        />
 
 
 

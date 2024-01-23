@@ -3,29 +3,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/splash"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-         />
+   <androidx.cardview.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:cardPreventCornerOverlap="true"
+       app:cardCornerRadius="10dp"
+       app:cardElevation="10dp"
+       app:cardUseCompatPadding="true"
+       >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           android:padding="10dp"
+           >
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="The title"
+               android:textSize="20sp"
+               android:textStyle="bold"
+               android:padding="10dp"
+               android:id="@+id/titleTv"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Description"
+               android:padding="10dp"
+               android:ellipsize="end"
+               android:maxLines="4"
+               android:minLines="3"
+               android:id="@+id/DescriptionTv"
+               />
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               >
 
-    <Button
-        android:id="@+id/buttonOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/blue"
-        android:text="acivityOne"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        />
+               <TextView
+                   android:id="@+id/pirorityTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="start"
+                   android:layout_margin="8dp"
+                   android:background="@drawable/btn_backpart"
+                   android:drawableStart="@drawable/ev_time"
+                   android:drawableLeft="@drawable/ev_time"
+                   android:drawablePadding="5dp"
+                   android:gravity="center_vertical"
+                   android:padding="5dp"
+                   android:text="red"
+                   android:textColor="#000"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+
+               <TextView
+                   android:id="@+id/dateTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="end"
+                   android:layout_margin="8dp"
+                   android:background="@drawable/btn_backpart"
+                   android:drawableStart="@drawable/ic_time"
+                   android:drawableLeft="@drawable/ic_time"
+                   android:drawablePadding="5dp"
+                   android:gravity="center_vertical"
+                   android:padding="5dp"
+                   android:text="dd/mm/yyyy"
+                   android:textColor="#000"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+       </LinearLayout>
+   </androidx.cardview.widget.CardView>
 
 
 
