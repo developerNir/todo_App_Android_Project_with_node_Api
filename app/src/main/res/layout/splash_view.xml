@@ -43,6 +43,52 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
+               android:background="@drawable/green_shape"
+               >
+
+               <TextView
+                   android:id="@+id/nodeTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="start"
+                   android:layout_margin="8dp"
+                   android:background="@drawable/btn_backpart"
+                   android:drawableStart="@drawable/node_ic"
+                   android:drawableLeft="@drawable/node_ic"
+                   android:drawablePadding="5dp"
+                   android:gravity="center_vertical"
+                   android:padding="5dp"
+                   android:text="Create Note"
+                   android:textColor="#000"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+
+               <TextView
+                   android:id="@+id/deleteTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="end"
+                   android:layout_margin="8dp"
+                   android:background="@drawable/btn_backpart"
+                   android:drawableStart="@drawable/delete_ic"
+                   android:drawableLeft="@drawable/delete_ic"
+                   android:drawablePadding="5dp"
+                   android:gravity="center_vertical"
+                   android:padding="5dp"
+                   android:text="Delete Todo"
+                   android:textColor="#000"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
                >
 
                <TextView

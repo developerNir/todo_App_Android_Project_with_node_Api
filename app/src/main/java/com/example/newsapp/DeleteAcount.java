@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -43,8 +44,11 @@ public class DeleteAcount extends AppCompatActivity {
         textView = findViewById(R.id.textViewToken);
 
 
-        textView.append("mytoken is: \n"+shareToken);
-
+        if (shareToken.length() >0) {
+            textView.append("mytoken is: \n" + shareToken);
+        }else {
+            textView.setText("no Token");
+        }
 
         RequestQueue requestQueue = Volley.newRequestQueue(DeleteAcount.this);
 
@@ -55,14 +59,18 @@ public class DeleteAcount extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response.toString());
                     boolean success = jsonObject.getBoolean("success");
-                    if (success == false){
+                    if (!success){
                         String error = jsonObject.getString("error");
                         Log.d(TAG, "onResponse: Server"+error);
                     }
-                    if (success == true){
+                    if (success){
                         String data = jsonObject.getString("data");
                         String massage = jsonObject.getString("massage");
                         Log.d(TAG, "onResponse: Success: "+data+" "+massage);
+                        Toast.makeText(DeleteAcount.this, "Delete success"+massage, Toast.LENGTH_SHORT).show();
+                        MainActivity.sharedPreferences.edit()
+                                .remove("token")
+                                .apply();
 
                     }
                 } catch (JSONException e) {

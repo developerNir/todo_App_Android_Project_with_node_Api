@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
 
-    TextView textView;
+    TextView textView,tokenTv;
     Button button, buttonVerify,BtnVerify,btnGetAllTodo, btnCreateTodo;
 
     @SuppressLint("MissingInflatedId")
@@ -32,6 +32,14 @@ public class SplashActivity extends AppCompatActivity {
         BtnVerify = findViewById(R.id.BtnVerify);
         btnGetAllTodo = findViewById(R.id.btnGetAllTodo);
         btnCreateTodo = findViewById(R.id.btnCreateTodo);
+        tokenTv = findViewById(R.id.tokenTv);
+
+
+
+        tokenTv.setOnClickListener(v->{
+            tokenTv.setText(MainActivity.sharedPreferences.getString("token","notToken"));
+        });
+
 
 
 

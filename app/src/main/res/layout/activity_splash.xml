@@ -69,6 +69,15 @@
         android:paddingHorizontal="30dp"
         android:id="@+id/btnCreateTodo"
         />
+    <TextView
+        android:id="@+id/tokenTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="token : "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="20dp"
+        />
 
 
 

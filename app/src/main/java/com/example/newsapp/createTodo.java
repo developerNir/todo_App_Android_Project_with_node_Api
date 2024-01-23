@@ -3,6 +3,7 @@ package com.example.newsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -95,7 +96,9 @@ public class createTodo extends AppCompatActivity {
                 try {
                     boolean success = response.getBoolean("success");
                     if (success){
+                        Toast.makeText(createTodo.this, "Todo Create Success", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "onResponse: "+response);
+                        startActivity(new Intent(createTodo.this,GetAllTodo.class));
                     }
                     if (!success){
                         String error = response.getString("error");

@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -82,14 +85,17 @@ public class GetAllTodo extends AppCompatActivity {
                             String description = todo.getString("description");
                             String priority = todo.getString("priority");
                             String createDate = todo.getString("createdAt");
+                            String id = todo.getString("_id");
 
                             // add array list data ------------
+
 
                             hashMap = new HashMap<>();
                             hashMap.put("title",title);
                             hashMap.put("des",description);
                             hashMap.put("priority", priority);
                             hashMap.put("createDate",createDate);
+                            hashMap.put("todoId", id);
                             arrayList.add(hashMap);
 //                            Log.d(TAG, "onResponse: title: \n"+title);
 //                            Log.d(TAG, "onResponse: description: \n"+description);
@@ -171,11 +177,60 @@ public class GetAllTodo extends AppCompatActivity {
             String des = hashMap.get("des");
             String piro = hashMap.get("priority");
             String myDate = hashMap.get("createDate");
+            // todo Id ----------------------------
+            String todo_id = hashMap.get("todoId");
 
             holder.titleTv.setText(title);
             holder.DesTv.setText(des);
             holder.DateTv.setText(myDate);
             holder.priorityTv.setText(piro);
+            // node create and click here --------------------
+            holder.nodeTv.setOnClickListener(v->{
+                 CreateNote.todoId = todo_id;
+                 startActivity(new Intent(GetAllTodo.this,CreateNote.class));
+
+            });
+            holder.deleteTv.setOnClickListener(v->{
+                // delete todo --------------------------------
+                    String TAG = "deleteTodo";
+                    RequestQueue requestQueue = Volley.newRequestQueue(GetAllTodo.this);
+                    String url = "https://sore-pear-fish-cuff.cyclic.app/api/v1/todo-delete/"+todo_id;
+                    String token = MainActivity.sharedPreferences.getString("token", "");
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                boolean success = response.getBoolean("success");
+                                if (success){
+                                    Toast.makeText(GetAllTodo.this, "Todo delete Success", Toast.LENGTH_SHORT).show();
+                                    recreate();
+                                }
+                                if (!success){
+                                    String error = response.getString("error");
+                                    Toast.makeText(GetAllTodo.this, "Error"+error, Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse: "+error);
+                        }
+                    }){
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            HashMap<String ,String>hashMap = new HashMap<>();
+                            hashMap.put("Authorization", token);
+                            return hashMap;
+                        }
+                    };
+
+                    requestQueue.add(jsonObjectRequest);
+
+            });
             if (Objects.equals(piro, "rad")) {
                 holder.priorityTv.setBackground(getDrawable(R.drawable.red_shape));
             }
@@ -191,13 +246,16 @@ public class GetAllTodo extends AppCompatActivity {
 
         private class myViewHolder extends RecyclerView.ViewHolder{
 
-            TextView titleTv,DesTv,DateTv,priorityTv;
+            TextView titleTv,DesTv,DateTv,priorityTv,nodeTv,deleteTv;
             public myViewHolder(@NonNull View itemView) {
                 super(itemView);
                 titleTv = itemView.findViewById(R.id.titleTv);
                 DesTv = itemView.findViewById(R.id.DescriptionTv);
                 DateTv = itemView.findViewById(R.id.dateTv);
                 priorityTv = itemView.findViewById(R.id.pirorityTv);
+                nodeTv = itemView.findViewById(R.id.nodeTv);
+                deleteTv = itemView.findViewById(R.id.deleteTv);
+
                 
 
             }
