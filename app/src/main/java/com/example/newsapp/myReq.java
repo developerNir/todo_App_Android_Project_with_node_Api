@@ -18,4 +18,27 @@ import java.util.Map;
 
 public class myReq {
 
+    private String response;
+    private String error;
+
+    public void jsonRequestApi(Context context, String url, String token){
+
+
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 }

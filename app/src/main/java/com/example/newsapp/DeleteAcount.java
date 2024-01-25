@@ -29,9 +29,8 @@ public class DeleteAcount extends AppCompatActivity {
     private static final String TAG = "deleteResponse";
 
     TextView textView;
-    String shareToken = MainActivity.sharedPreferences.getString("token", "DefualtValue");
-
-
+    SharedPreferences sharedPreferences;
+    String shareToken;
 
 
 
@@ -44,12 +43,20 @@ public class DeleteAcount extends AppCompatActivity {
         textView = findViewById(R.id.textViewToken);
 
 
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name),MODE_PRIVATE);
+
+        shareToken = sharedPreferences.getString("token", "");
+
+
+
         if (shareToken.length() >0) {
             textView.append("mytoken is: \n" + shareToken);
         }else {
             textView.setText("no Token");
         }
 
+
+        // user delete account -----------------------------
         RequestQueue requestQueue = Volley.newRequestQueue(DeleteAcount.this);
 
 
@@ -68,9 +75,6 @@ public class DeleteAcount extends AppCompatActivity {
                         String massage = jsonObject.getString("massage");
                         Log.d(TAG, "onResponse: Success: "+data+" "+massage);
                         Toast.makeText(DeleteAcount.this, "Delete success"+massage, Toast.LENGTH_SHORT).show();
-                        MainActivity.sharedPreferences.edit()
-                                .remove("token")
-                                .apply();
 
                     }
                 } catch (JSONException e) {

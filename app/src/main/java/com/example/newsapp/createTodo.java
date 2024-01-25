@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,8 @@ public class createTodo extends AppCompatActivity {
     EditText titleEd,descriptionEd;
     Button btnCreate;
     String TAG = "createTodo";
+    String getToken;
+    SharedPreferences sharedPreferences;
     String url = "https://sore-pear-fish-cuff.cyclic.app/api/v1/todo-create";
 
     @SuppressLint("MissingInflatedId")
@@ -54,9 +57,11 @@ public class createTodo extends AppCompatActivity {
         descriptionEd = findViewById(R.id.descriptionEd);
         btnCreate = findViewById(R.id.btnCreate);
 
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name),MODE_PRIVATE);
 
 
-        String getToken = MainActivity.sharedPreferences.getString("token", "");
+
+        getToken = sharedPreferences.getString("token", "");
         // dropDown Function ----------------------------------------------
         arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_manu, item);
         autoCompleteTextView.setAdapter(arrayAdapter);

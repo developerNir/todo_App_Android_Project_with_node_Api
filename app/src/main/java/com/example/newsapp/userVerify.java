@@ -28,6 +28,8 @@ public class userVerify extends AppCompatActivity {
     Button btnVerify;
     TextView textView;
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     @SuppressLint("MissingInflatedId")
@@ -43,6 +45,7 @@ public class userVerify extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_circular);
 
 
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name),MODE_PRIVATE);
 
 
 
@@ -72,6 +75,9 @@ public class userVerify extends AppCompatActivity {
 
                             textView.append("\n token"+token);
                             textView.append("\n userData"+user);
+                            editor.putString("token", token);
+                            editor.apply();
+
 
                         }
 

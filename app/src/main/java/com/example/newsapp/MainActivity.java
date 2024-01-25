@@ -118,11 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
                                 editor = sharedPreferences.edit();
                                 editor.putString("token",token);
+                                editor.putString("email", email);
                                 editor.apply();
 
                                 textView.append("\n" + token);
                                 textView.append("\n" + name);
-                                textView.append("\n" + email);
+                                textView.append("\n" + sharedPreferences.getString("email","notUser"));
                                 textView.append("\n" + otp);
                                 textView.append("\n\n" + user);
                             }

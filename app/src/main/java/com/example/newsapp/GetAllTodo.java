@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +44,8 @@ public class GetAllTodo extends AppCompatActivity {
     ArrayList<HashMap<String,String>>arrayList = new ArrayList<>();
     HashMap<String,String>hashMap;
     String url = "https://sore-pear-fish-cuff.cyclic.app/api/v1/all-todo";
+    SharedPreferences sharedPreferences;
+    String token;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -54,8 +57,9 @@ public class GetAllTodo extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         progressBar = findViewById(R.id.progress_circularShow);
         textView = findViewById(R.id.errorHand);
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
 
-        String token = MainActivity.sharedPreferences.getString("token", "");
+        token = sharedPreferences.getString("token", "");
 
 
 
@@ -195,7 +199,7 @@ public class GetAllTodo extends AppCompatActivity {
                     String TAG = "deleteTodo";
                     RequestQueue requestQueue = Volley.newRequestQueue(GetAllTodo.this);
                     String url = "https://sore-pear-fish-cuff.cyclic.app/api/v1/todo-delete/"+todo_id;
-                    String token = MainActivity.sharedPreferences.getString("token", "");
+
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
                         @Override
@@ -204,7 +208,11 @@ public class GetAllTodo extends AppCompatActivity {
                                 boolean success = response.getBoolean("success");
                                 if (success){
                                     Toast.makeText(GetAllTodo.this, "Todo delete Success", Toast.LENGTH_SHORT).show();
-                                    recreate();
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                    startActivity(getIntent());
+                                    overridePendingTransition(0, 0);
+
                                 }
                                 if (!success){
                                     String error = response.getString("error");

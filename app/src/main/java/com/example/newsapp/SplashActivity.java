@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
 
     TextView textView,tokenTv;
     Button button, buttonVerify,BtnVerify,btnGetAllTodo, btnCreateTodo;
+    SharedPreferences sharedPreferences;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,10 +36,18 @@ public class SplashActivity extends AppCompatActivity {
         btnCreateTodo = findViewById(R.id.btnCreateTodo);
         tokenTv = findViewById(R.id.tokenTv);
 
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name),MODE_PRIVATE);
+
 
 
         tokenTv.setOnClickListener(v->{
-            tokenTv.setText(MainActivity.sharedPreferences.getString("token","notToken"));
+            if (sharedPreferences.getString("token","").length()>0){
+                tokenTv.setText("--"+sharedPreferences.getString("token","notToken"));
+
+            }else {
+                tokenTv.setText("--"+"notToken");
+
+            }
         });
 
 
